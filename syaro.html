@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社労士 第57回 選択式 完全合格アプリ</title>
+<style>
+:root {
+  --bg: #0b0e14;
+  --card: #151a22;
+  --card-header: #1e2530;
+  --accent: #3b82f6;
+  --accent-hover: #2563eb;
+  --ok: #10b981;
+  --ng: #ef4444;
+  --txt: #f3f4f6;
+  --sub: #9ca3af;
+  --border: #2d3748;
+}
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--txt);
+  padding-bottom: 90px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+header {
+  position: sticky;
+  top: 0;
+  background-color: var(--card);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.stats {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--sub);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.stats span {
+  background: #222c3a;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+.stats b {
+  color: #fff;
+}
+.wrap {
+  padding: 14px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+.q-cat {
+  font-size: 12px;
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 12px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+.q-text {
+  font-size: 14.5px;
+  line-height: 2.2;
+  margin-bottom: 16px;
+  white-space: pre-wrap;
+  color: var(--txt);
+  background: #0f131a;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+}
+.blank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 28px;
+  margin: 0 4px;
+  text-align: center;
+  border-bottom: 3px solid var(--accent);
+  color: var(--accent);
+  font-weight: bold;
+  padding: 0 8px;
+  cursor: pointer;
+  background: rgba(59, 130, 246, 0.08);
+  border-radius: 4px 4px 0 0;
+  transition: all 0.2s ease;
+  vertical-align: middle;
+}
+.blank:hover {
+  background: rgba(59, 130, 246, 0.2);
+}
+.blank.cur {
+  background: rgba(59, 130, 246, 0.3);
+  border-bottom: 3px solid #60a5fa;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+  transform: translateY(-1px);
+}
+.blank.filled {
+  color: #ffffff;
+  background: #1e2530;
+  border-bottom-color: #4b5563;
+}
+.blank.ok {
+  color: #fff;
+  background-color: rgba(16, 185, 129, 0.2);
+  border-bottom-color: var(--ok);
+}
+.blank.ng {
+  color: #fff;
+  background-color: rgba(239, 68, 68, 0.2);
+  border-bottom-color: var(--ng);
+}
+.label {
+  font-weight: bold;
+  color: #93c5fd;
+  margin: 14px 0 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+.label::before {
+  content: "📍";
+  margin-right: 6px;
+}
+.choices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+@media (max-width: 480px) {
+  .choices {
+    grid-template-columns: 1fr;
+  }
+}
+.choice {
+  background: #1e2530;
+  color: var(--txt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+.choice:hover {
+  background: #262e3d;
+  border-color: #4b5563;
+}
+.choice.sel {
+  border-color: var(--accent);
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.25);
+}
+.btn {
+  display: block;
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn:hover {
+  background: var(--accent-hover);
+}
+.btn.sub {
+  background: #2a3441;
+  color: var(--txt);
+  border: 1px solid var(--border);
+}
+.btn.sub:hover {
+  background: #344152;
+}
+.row2 {
+  display: flex;
+  gap: 10px;
+}
+.btn.half {
+  flex: 1;
+}
+.exp {
+  display: none;
+  background: #0f131a;
+  border-left: 4px solid var(--accent);
+  padding: 14px;
+  border-radius: 8px;
+  margin-top: 16px;
+  font-size: 13.5px;
+  line-height: 1.8;
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+}
+.exp.show {
+  display: block;
+}
+.exp .item {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #1f2937;
+}
+.exp .item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.exp b {
+  color: #93c5fd;
+}
+.exp .x {
+  color: var(--ng);
+  font-weight: bold;
+  margin-right: 6px;
+}
+.exp .o {
+  color: var(--ok);
+  font-weight: bold;
+  margin-right: 6px;
+}
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--card);
+  display: flex;
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.25);
+  z-index: 99;
+}
+.nav button {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--sub);
+  padding: 10px 0;
+  font-size: 11px;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.nav button.active {
+  color: var(--accent);
+}
+.nav button div {
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+.page {
+  display: none;
+}
+.page.active {
+  display: block;
+}
+textarea {
+  width: 100%;
+  height: 120px;
+  background: #0f131a;
+  color: var(--txt);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.wrongItem {
+  font-size: 13.5px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #1a202c;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--ng);
+}
+.wrongItem .h {
+  color: #fca5a5;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+small {
+  color: var(--sub);
+}
+.hint {
+  font-size: 12px;
+  color: var(--sub);
+  margin-top: 6px;
+  text-align: center;
+  background-color: #141b24;
+  padding: 6px;
+  border-radius: 4px;
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>📚 社労士 第57回（令和7年度） 選択式対策</h1>
+  <div class="stats">
+    <span>問題 <b id="prog">1</b>/<b id="totalQ">8</b></span>
+    <span>正解空欄 <b id="okBlanks">0</b></span>
+    <span>誤答記録 <b id="ngCount">0</b></span>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- 学習ページ -->
+  <div class="page active" id="p-study">
+    <div class="card" id="quizCard"></div>
+  </div>
+
+  <!-- 誤答履歴ページ -->
+  <div class="page" id="p-review">
+    <div class="card">
+      <h3 style="margin-top:0; color:#fff;">🔁 誤答（間違えた空欄）の自動記録</h3>
+      <p><small>「採点する」を押した時、間違えてしまった空欄が、日付・あなたの回答・正しい解答・解説とともにリアルタイムでここに保存されます。</small></p>
+      <div id="wrongList"></div>
+      <button class="btn sub" onclick="clearWrong()" style="margin-top: 15px;">記録を消去する</button>
+    </div>
+  </div>
+
+  <!-- 追加・バックアップページ -->
+  <div class="page" id="p-add">
+    <div class="card">
+      <h3 style="margin-top:0; color:#fff;">➕ 他の問題を追加する（択一式など）</h3>
+      <p style="font-size:12px; line-height:1.7; color: var(--sub);">
+        択一式などの追加は、下記のJSONフォーマットを利用して手軽に行えます。
+        「answer」には【A】【B】【C】【D】【E】の順で正答となる選択肢のインデックス番号（0〜19）を設定してください。
+      </p>
+      <textarea id="box" placeholder='[
+  {
+    "cat": "労働基準法 問1（択一式風）",
+    "text": "使用者は、労働者に対して、【A】時間を超えて労働させてはならない。",
+    "choices": ["1日8時間", "1日7時間", "1日10時間"],
+    "answer": [0],
+    "exp": ["【A】= 1日8時間。労働基準法第32条で原則1日8時間・1週40時間と定めています。"]
+  }
+]'></textarea>
+      <button class="btn" onclick="importJSON()">追加を実行する</button>
+      <p class="hint" style="margin-top:12px;">現在のアクティブ問題数: <b id="cnt" style="color:var(--accent)">8</b> 問</p>
+      <div class="row2" style="margin-top:12px">
+        <button class="btn sub half" onclick="resetSeed()">デフォルト（第57回選択式全8問）に初期化</button>
+        <button class="btn sub half" onclick="exportJSON()">データをバックアップ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="active" onclick="tab('study',this)"><div>✏️</div>学習</button>
+  <button onclick="tab('review',this)"><div>🔁</div>誤答記録</button>
+  <button onclick="tab('add',this)"><div>⚙️</div>データ設定</button>
+</div>
+
+<script>
+/* ===== 第57回 社会保険労務士試験 選択式 全8問・全選択肢・公式解答完全準拠データ ===== */
+var SEED = [
+  {
+    cat: "労働基準法及び労働安全衛生法 〔問 1〕",
+    text: "₁ 労働基準法第₁₁₄ 条は、 【A】 は、同法第₃₇ 条の規定に違反した使用者に対して、労働者の請求により、同条の規定により使用者が支払わなければならない金額についての未払金のほか、これと同一額の 【B】 の支払を命ずることができる旨規定している。\n\n₂ 「労働基準法₆₅ 条は、産前産後休業を定めているが、産前産後休業中の賃金については何らの定めを置いていないから、産前産後休業が有給であることまでも保障したものではないと解するのが相当である。〔…（略）…〕本件各回覧文書によって具体化された本件₉₀ ％条項は、労働基準法₆₅ 条で認められた産前産後休業を取る権利〔…（略）…〕に基づく不就労を含めて出勤率を算定するものであるが、上述のような労働基準法₆₅ 条〔…（略）…〕の趣旨に照らすと、これにより上記権利等の行使を抑制し、ひいては労働基準法等が 【C】 場合に限り、公序に反するものとして無効となると解するのが相当である」。\n\n₃ 事業者は、労働安全衛生法第₂₂ 条に基づき、健康障害を防止するため必要な措置を講じなければならないが、事業場における自主的な労働衛生管理活動の促進を図るためには、総括安全衛生管理者、産業医、衛生管理者、衛生推進者等の選任及び職務の励行、衛生委員会の設置及び運営等の労働衛生管理体制の確立を基本とした上で、作業環境管理、 【D】 及び健康管理並びに労働衛生教育の総合的な実施を図っていく必要がある。\n\n₄ 労働安全衛生法第₄₂ 条は、「特定機械等以外の機械等で、別表第₂ に掲げるものその他危険若しくは有害な作業を必要とするもの、危険において使用するもの又は危険若しくは健康障害を防止するため使用するもののうち、政令で定めるものは、厚生労働大臣が定める規格又は安全装置を具備しなければ、 【E】 、又は設置してはならない。」と定めている。",
+    choices: [
+      "① 慰謝料",
+      "② 厚生労働大臣",
+      "③ 裁判所",
+      "④ 作業管理",
+      "⑤ 使用者に労働者の仕事と生活の調和にも配慮することを規定している趣旨を実質的に失わせるものと認められる",
+      "⑥ 上記権利等を保障した趣旨を実質的に失わせるものと認められる",
+      "⑦ 譲渡し、貸与し",
+      "⑧ 譲渡し、展示し",
+      "⑨ 生産管理",
+      "⑩ 遅延損害金",
+      "⑪ 同法等に違反する行為に罰則を設けている意味を没却させる",
+      "⑫ 都道府県労働局長",
+      "⑬ 賠償金",
+      "⑭ 販売し、賃貸し",
+      "⑮ 販売し、販売のために展示し",
+      "⑯ 付加金",
+      "⑰ 有害物管理",
+      "⑱ 労働基準監督署長",
+      "⑲ 労働時間管理",
+      "⑳ 労働条件は労働者と使用者が対等の立場において決定すべきものとしている意味を没却させる"
+    ],
+    answer: [2, 15, 5, 3, 6], // A:③, B:⑯, C:⑥, D:④, E:⑦
+    exp: [
+      "【A】= ③ 裁判所。労基法114条に基づく「付加金」の支払いを命ずることができる主体は裁判所です（行政官庁や労基署長等ではありません）。",
+      "【B】= ⑯ 付加金。解雇予告手当、休業手当、割増賃金、有給休暇の賃金の未払に対し、これらと同一額の支払いを命じることができるのが「付加金」です。",
+      "【C】= ⑥ 上記権利等を保障した趣旨を実質的に失わせるものと認められる。最高裁判所の判例（東朋学園事件）からの出題です。",
+      "【D】= ④ 作業管理。労働安全衛生における3管理とは、「作業環境管理」「作業管理」「健康管理」です。空欄Dは作業管理が入ります。",
+      "【E】= ⑦ 譲渡し、貸与し。労働安全衛生法第42条（譲渡等の制限）「…厚生労働大臣が定める規格又は安全装置を具備しなければ、譲渡し、貸与し、又は設置してはならない。」と定められています。"
+    ]
+  },
+  {
+    cat: "労働者災害補償保険法 〔問 2〕",
+    text: "₁ 遺族補償年金を受けることができる、障害の状態にある遺族の障害の状態について、労災保険法施行規則第₁₅ 条は、「障害の状態は、身体に別表第₁ の障害等級の 【A】 に該当する障害がある状態又は負傷若しくは疾病が治らないで、身体の機能若しくは精神に、 【B】 が高度の制限を受けるか、若しくは 【B】 に高度の制限を加えることを必要とする程度以上の障害がある状態とする。」と定めている。\n\n₂ 労災保険法施行規則第₃₆ 条第₁ 項は、「長期家族介護者援護金は、別表第₁ の障害等級第₁ 級若しくは第₂ 級の障害補償年金、複数事業労働者障害年金若しくは障害年金又は別表第₂ の傷病等級第₁ 級若しくは第₂ 級の傷病補償年金、複数事業労働者傷病年金若しくは傷病年金を受けていた期間が 【C】 以上である者の遺族のうち、支援が必要な者として厚生労働省労働基準局長が定める要件を満たす者に対して、支給するものとする。」と規定している。\n\n₃ 最高裁判所は、労災就学援護費不支給決定が抗告訴訟の対象となるかが問題となった事件において、次のように判示した。\n「労災就学援護費に関する制度の仕組みにかんがみれば、〔労災保険〕法は、労働者が業務災害等を被った場合に、政府が、〔労災保険〕法第₃ 章の規定に基づいて行う保険給付を 【D】 するために、労働福祉事業〔現・社会復帰促進等事業〕として、保険給付と同様の手続により、被災労働者又はその遺族に対して労災就学援護費を支給することができる旨を規定しているものと解するのが相当である。そして、被災労働者又はその遺族は、上記のとおり、所定の支給要件を具備するときは所定額の労災就学援護費の支給を受けることができるという抽象的な地位を与えられているが、具体的に支給を受けるためには、 【E】 に申請し、所定の支給要件を具備していることの確認を受けなければならず、 【E】 の支給決定によって初めて具体的な労災就学援護費の支給請求権を取得するものといわなければならない。」",
+    choices: [
+      "① ₃ 年",
+      "② ₅ 年",
+      "③ ₇ 年",
+      "④ ₁₀ 年",
+      "⑤ 確保",
+      "⑥ 厚生労働大臣",
+      "⑦ 第₁ 級",
+      "⑧ 第₅ 級以上",
+      "⑨ 第₈ 級以上",
+      "⑩ 第₁₂ 級以上",
+      "⑪ 代替",
+      "⑫ 都道府県労働局長",
+      "⑬ 日常生活",
+      "⑭ 日常生活又は社会生活",
+      "⑮ 付加",
+      "⑯ 補完",
+      "⑰ 労働",
+      "⑱ 労働基準監督署長",
+      "⑲ 労働者災害補償保険審査官",
+      "⑳ 労働又は社会生活"
+    ],
+    answer: [7, 16, 3, 15, 17], // A:⑧, B:⑰, C:④, D:⑯, E:⑱
+    exp: [
+      "【A】= ⑧ 第₅ 級以上。労災則15条に定める障害の状態の基準は、「身体に別表第1の障害等級の『第5級以上』に該当する障害がある状態」とされています。",
+      "【B】= ⑰ 労働。同規則第15条の続きは、「…身体の機能若しくは精神に、『労働』が高度の制限を受けるか、若しくは『労働』に高度の制限を加えることを必要とする程度以上の…」となります。",
+      "&emsp;（※ 【B】は同じ語句が入ります。選択肢⑰の「労働」が適用されます。）",
+      "【C】= ④ ₁₀ 年。労災保険法施行規則第36条に定める長期家族介護者援護金の支給対象要件は、年金等を受けていた期間が「10年」以上です。",
+      "&emsp;（※ 選択肢は④の「₁₀ 年」です。）",
+      "【D】= ⑯ 補完。社会復帰促進等事業に関する最高裁判決からの引用です。「保険給付を『補完』するために…」という判断が示されました。",
+      "【E】= ⑱ 労働基準監督署長。同判決内における支給決定の実施機関は「労働基準監督署長」です。"
+    ]
+  },
+  {
+    cat: "雇用保険法 〔問 3〕",
+    text: "₁ 雇用保険法第₁ 条は、「雇用保険は、労働者が失業した場合及び労働者について雇用の継続が困難となる事由が生じた場合に必要な給付を行うほか、労働者が自ら職業に関する教育訓練を受けた場合 【A】 をした場合に必要な給付を行うことにより、労働者の生活及び雇用の安定を図るとともに、求職活動を容易にする等その就職を促進し、あわせて、労働者の職業の安定に資するため、 【B】 、雇用状態の是正及び雇用機会の増大、労働者の能力の開発及び向上その他労働者の福祉の増進を図ることを目的とする。」と規定している。\n\n₂ 雇用保険法第₃₇ 条の₄ 第₅ 項は、「高年齢求職者給付金の支給を受けようとする高年齢受給資格者は、離職の日の翌日から起算して 【C】 を経過する日までに、厚生労働省令で定めるところにより、公共職業安定所に出頭し、 【D】 、失業していることについての認定を受けなければならない。」と規定している。\n\n₃ 雇用保険法第₅₃ 条第₁ 項は、日雇労働被保険者が失業した場合に日雇労働求職者給付金の支給を受けるための要件の₁ つとして、継続する₆ 月間に当該日雇労働被保険者について印紙保険料が各月₁₁ 日分以上、かつ、通算して 【E】 分以上納付されていることを定めている。",
+    choices: [
+      "① ₁ か月",
+      "② ₇₂ 日",
+      "③ ₇₈ 日",
+      "④ ₈₄ 日",
+      "⑤ ₉₀ 日",
+      "⑥ ₄ か月",
+      "⑦ ₆ か月",
+      "⑧ ₁ 年",
+      "⑨ 及び労働者が子を養育するための休業",
+      "⑩ 求職の申込みをした上",
+      "⑪ 経済的社会的地位の向上",
+      "⑫ 高年齢受給資格者失業認定申告書を提出した上",
+      "⑬ 雇用保険被保険者証を提出した上",
+      "⑭ 産業に必要な労働力の充足",
+      "⑮ 失業の予防",
+      "⑯ 退職証明書を提出した上",
+      "⑰ 転職の支援",
+      "⑱ 並びに労働者が子を養育するための休業及び所定労働時間を短縮することによる就業",
+      "⑲ 並びに労働者が子を養育するための休業及び対象家族を介護するための休業",
+      "⑳ 並びに労働者が子を養育するため若しくは対象家族を介護するための休業及び所定労働時間を短縮することによる就業"
+    ],
+    answer: [17, 14, 7, 9, 2], // A:⑱, B:⑮, C:⑧, D:⑩, E:③
+    exp: [
+      "【A】= ⑱ 並びに労働者が子を養育するための休業及び所定労働時間を短縮することによる就業。雇用保険法第1条（目的）の文言を問う重要な条文問題です。",
+      "【B】= ⑮ 失業の予防。法第1条の後半「…あわせて、労働者の職業の安定に資するため、『失業の予防』、雇用状態の是正及び雇用機会の増大…」に該当します。",
+      "【C】= ⑧ ₁ 年。高年齢求職者給付金の支給期限（受給期限）は、離職の日の翌日から起算して「1年」を経過する日（＝1年間）となります。",
+      "【D】= ⑩ 求職の申込みをした上。高年齢求職者給付金の支給手続きは「公共職業安定所に出頭し、求職の申込みをした上、失業の認定を受ける」必要があります。",
+      "【E】= ③ ₇₈ 日。日雇労働求職者給付金（普通給付）の支給要件は、継続する6月間に印紙保険料が各月11日分以上、かつ通算して「78日」以上納付されていることです。"
+    ]
+  },
+  {
+    cat: "労務管理その他の労働に関する一般常識 〔問 4〕",
+    text: "₁ 総務省「統計からみた我が国の高齢者（統計トピックス No. ₁₄₂）（令和₆ 年₉ 月₁₅ 日）」によれば、₆₅ 歳以上の就業者を主な産業別にみると、「卸売業、小売業」が₁₃₂ 万人と最も多く、次いで「 【A】 」が₁₀₇ 万人で続いている。\n産業別に₆₅ 歳以上の就業者を₁₀ 年前と比較すると、「 【A】 」が₆₃ 万人増加し、₁₀ 年前の約₂．₄ 倍となった。ほとんどの主な産業で₆₅ 歳以上の就業者が増加している一方で、「 【B】 」の₆₅ 歳以上の就業者は₁₀ 年前と比較して₃ 万人減少している。なお、各産業の就業者に占める₆₅ 歳以上の就業者の割合をみると、「 【B】 」が₅₂．₉ ％と最も高くなっている。\n\n₂ 労働施策総合推進法第₃₀ 条の₂ 第₁ 項は、「事業主は、職場において行われる優越的な関係を背景とした言動であつて、 【C】 によりその雇用する労働者の就業環境が害されることのないよう、当該労働者からの相談に応じ、適切に対応するために必要な体制の整備その他の雇用管理上必要な措置を講じなければならない。」と定めている。\n\n₃ 最高裁判所は、使用者が労働組合に対し組合集会等のための従業員食堂の使用を許諾しない状態が続いていることをもって不当労働行為に当たるか否かが問題となった事件において、次のように判示した。\n「…上告人〔会社〕が、Ｘ守衛事件を契機として、従前の取扱いを変更し、その後、食堂使用について 【D】 権を前提とした合理的な準則を定立しようとして、上告人の 【D】 権を無視する組合に対し使用を拒否し、使用条件について合意が成立しない結果、自己の見解を維持する組合に対し食堂を使用させない状態が続いたことも、やむを得ないものというべきである。…条件が折り合わないまま、上告人が組合又はその組合員に対し食堂の使用を許諾しない状態が続いていることをもって、上告人の権利の濫用であると認めるべき特段の事情があるとはいえず、 【E】 であるとも断じ得ないから、上告人の食堂使用の拒否が不当労働行為に当たるということはできない。」",
+    choices: [
+      "① いたずらに組合秩序を混乱させようとしたもの",
+      "② 医療、福祉",
+      "③ 運輸業、郵便業",
+      "④ 管理監督",
+      "⑤ 客観的に合理的な理由を欠いたもの",
+      "⑥ 業務上必要かつ相当な範囲を超えたもの",
+      "⑦ 組合に対する報復行為を行ったもの",
+      "⑧ 組合の施設利用権限を不利益に変更したもの",
+      "⑨ 組合の弱体化を図ろうとしたもの",
+      "⑩ 建設業",
+      "⑪ 指揮命令",
+      "⑫ 施設管理",
+      "⑬ 宿泊業、飲食サービス業",
+      "⑭ 生活関連サービス業、娯楽業",
+      "⑮ 製造業",
+      "⑯ 通常甘受すべき程度を著しく超えるもの",
+      "⑰ 農業、林業",
+      "⑱ 不動産業、物品賃貸業",
+      "⑲ 利用許諾",
+      "⑳ 労働関係の当事者としての権利を濫用するもの"
+    ],
+    answer: [1, 16, 5, 11, 8], // A:②, B:⑰, C:⑥, D:⑫, E:⑨
+    exp: [
+      "【A】= ② 医療、福祉。総務省の統計調査に基づき、高齢就業者数が「卸売業、小売業」に次いで多い主な産業は「医療、福祉」となります。",
+      "【B】= ⑰ 農業、林業。就業者全体に占める高齢者の割合が52.9%と最も高い産業（半数以上が高齢者）は「農業、林業」です。",
+      "【C】= ⑥ 業務上必要かつ相当な範囲を超えたもの。労働施策総合推進法30条の2第1項（いわゆるパワハラ防止措置義務）における定義（優越的な関係、業務上必要かつ相当な範囲を超えた、就業環境を害する）からの出題です。",
+      "【D】= ⑫ 施設管理。企業の有する施設の管理権限は「施設管理」権と呼ばれます。判決文内に繰り返し登場します。",
+      "【E】= ⑨ 組合の弱体化を図ろうとしたもの。最高裁判決（国労広島地本食堂事件）の結言「…施設管理権を無視する組合に対し食堂を使用させない状態が続いたこともやむを得ない…『組合の弱体化を図ろうとしたもの』であるとも断じ得ないから…」より出題されました。"
+    ]
+  },
+  {
+    cat: "社会保険に関する一般常識 〔問 5〕",
+    text: "₁ 厚生労働省から令和₆ 年₆ 月に公表された「令和₅ 年度の国民年金の加入・保険料納付状況」によると、第₁ 号被保険者の国民年金保険料の納付状況についてみると、令和₅ 年度の最終納付率（令和₃ 年度分保険料）は、 【A】 ％となっている。\n\n₂ 高齢者医療確保法第₄ 条第₁ 項では、「 【B】 は、この法律の趣旨を尊重し、住民の高齢期における医療に要する費用の適正化を図るための取組及び高齢者医療制度の運営が適切かつ円滑に行われるよう所要の施策を実施しなければならない。」と規定している。\n\n₃ 介護保険法第₂ 条第₂ 項では、「前項 of 保険給付は、要介護状態等の軽減又は悪化の防止に資するよう行われるとともに、 【C】 に十分配慮して行われなければならない。」と規定している。\n\n₄ 確定給付企業年金法第₆₀ 条第₂ 項では、「 【D】 は、当該事業年度の末日における給付に要する費用の額の予想額の現価から掛金収入の額の予想額の現価を控除した額を基準として、厚生労働省令で定めるところにより算定した額とする。」と規定している。\n\n₅ 令和₆ 年版厚生労働白書によると、「多様化する国民の老後生活に対するニーズに対応しつつ、長期化する高齢期の経済基盤の充実を図るためには、老後生活の基本を支える公的年金に加え、企業年金・個人年金の充実が重要である。私的年金制度については、「 【E】 」（令和₄（₂₀₂₂）年₁₁ 月₂₈ 日新しい資本主義実現会議決定）において、①iDeCo の加入可能年齢を₇₀ 歳に引き上げること、②iDeCo の拠出限度額の引上げ等について、₂₀₂₄ 年の公的年金の財政検証に併せて結論を得ること、③iDeCo 各種手続きの簡素化等を行うこととされた」とある。",
+    choices: [
+      "① ₅₃．₁",
+      "② ₆₈．₁",
+      "③ ₈₃．₁",
+      "④ ₉₈．₁",
+      "⑤ 医療との連携",
+      "⑥ 国",
+      "⑦ 後期高齢者医療広域連合",
+      "⑧ 最低積立基準額",
+      "⑨ 資産所得倍増プラン",
+      "⑩ 生涯現役計画",
+      "⑪ 所得倍増プラン",
+      "⑫ 事業者又は施設との連携",
+      "⑬ 人生₁₀₀ 年計画",
+      "⑭ 責任準備金の額",
+      "⑮ 地方公共団体",
+      "⑯ 積立金の額",
+      "⑰ 積立上限額",
+      "⑱ 被保険者の心身の状況",
+      "⑲ 被保険者の自立した日常生活",
+      "⑳ 保険者"
+    ],
+    answer: [2, 14, 18, 13, 8], // A:③, B:⑮, C:⑲, D:⑭, E:⑨
+    exp: [
+      "【A】= ③ ₈₃．₁。令和5年度公表資料における、令和3年度分国民年金保険料の最終納付率は「83.1%」です。",
+      "【B】= ⑮ 地方公共団体。高齢者医療確保法第4条第1項の責務規定です。「『地方公共団体』は、この法律の趣旨を尊重し…」が入ります。",
+      "【C】= ⑲ 被保険者の自立した日常生活。介護保険法第2条第2項の理念規定です。「…『被保険者の自立した日常生活』に十分配慮して行われなければならない。」が正解です。",
+      "【D】= ⑭ 責任準備金の額。確定給付企業年金法第60条第2項で定義される数額は「責任準備金の額」です。",
+      "【E】= ⑨ 資産所得倍増プラン。令和4年11月28日に新しい資本主義実現会議において決定された政府方針は「資産所得倍増プラン」です。"
+    ]
+  },
+  {
+    cat: "健康保険法 〔問 6〕",
+    text: "₁ 被保険者が出産したときは、出産育児一時金として、政令で定める金額が支給される。政令で定める金額は、 【A】 円である。ただし、病院、診療所、助産所その他の者であって、所定の要件のいずれにも該当する出産であると保険者が認めるときは、 【A】 円に、 【B】 万円を超えない範囲内で保険者が定める金額を加算した金額である。出産育児一時金は、妊娠₄ か月（ 【C】 日）以上の出産であれば、早産、死産、流産、人工妊娠中絶であっても支給される。\n\n₂ 健康保険法第₃₁ 条第₁ 項の事業所の事業主は、厚生労働大臣の認可を受けて、当該事業所を適用事業所ではなくすることができる。認可を受けようとするときは、当該事業所の事業主は、当該事業所に使用される者（被保険者である者に限る。）の 【D】 以上の同意を得て、厚生労働大臣に申請しなければならない。認可の申請は、事業主の氏名及び住所並びに事業所の名称及び所在地を記載した申請書を 【E】 等に提出することによって行う。この申請書には、被保険者の同意を得たことを証する書類を添付しなければならない。",
+    choices: [
+      "① ₁",
+      "② ₂",
+      "③ ₂ 分の₁",
+      "④ ₃",
+      "⑤ ₃ 分の₁",
+      "⑥ ₃ 分の₂",
+      "⑦ ₄ 分の₃",
+      "⑧ ₅",
+      "⑨ ₈₄",
+      "⑩ ₈₅",
+      "⑪ ₈₆",
+      "⑫ ₈₇",
+      "⑬ ₄₆ 万₈，₀₀₀",
+      "⑭ ₄₇ 万₈，₀₀₀",
+      "⑮ ₄₈ 万₈，₀₀₀",
+      "⑯ ₄₉ 万₈，₀₀₀",
+      "⑰ 社会保険診療報酬支払基金又は国民健康保険団体連合会",
+      "⑱ 社会保険診療報酬支払基金又は地方厚生局長",
+      "⑲ 日本年金機構又は国民健康保険団体連合会",
+      "⑳ 日本年金機構又は地方厚生局長"
+    ],
+    answer: [14, 3, 9, 6, 19], // A:⑮, B:④, C:⑩, D:⑦, E:⑳
+    exp: [
+      "【A】= ⑮ ₄₈ 万₈，₀₀₀。現在の健康保険法における出産育児一時金の基礎となる政令指定額は「48万8,000円」です。",
+      "【B】= ④ ₃。産科医療補償制度の対象である場合の加算上限額は「3万円」（現在は総額50万円に引き上げられています）です。選択肢は④の「₃」となります。",
+      "【C】= ⑩ ₈₅。出産育児一時金の支給要件である「妊娠4ヶ月」は、日数に換算すると「85日」以上となります（28日×3ヶ月+1日）。",
+      "【D】= ⑦ ₄ 分の₃。任意適用取消（脱退）の申請要件として必要な、被保険者の同意割合は「4分の3」以上です。（※任意加入時の同意要件は「2分の1」以上ですので、混同注意です。）",
+      "【E】= ⑳ 日本年金機構又は地方厚生局長。健康保険の適用除外等の各種事務手続き書類は、管轄に応じて「日本年金機構又は地方厚生局長」へ提出することになります。"
+    ]
+  },
+  {
+    cat: "厚生年金保険法 〔問 7〕",
+    text: "₁ 厚生年金保険法第₂₁ 条第₁ 項の規定によると、実施機関は、被保険者が毎年₇ 月₁ 日現に使用される事業所において同日前₃ 月間（その事業所で継続して使用された期間に限るものとし、かつ、報酬支払の基礎となった日数が 【A】 （厚生労働省令で定める者（被保険者であって、その₁ 週間の所定労働時間が同一の事業所に使用される通常の労働者の₁ 週間の所定労働時間の₄ 分の₃ 未満である短時間労働者等）にあっては、 【B】 。）未満である月があるときは、その月を除く。）に受けた報酬の総額をその期間の月数で除して得た額を報酬月額として、標準報酬月額を決定するとされている。\n\n₂ 厚生年金保険法第₄₃ 条の₄ 第₁ 項の規定によると、調整期間における再評価率の改定については、 【C】 に、調整率に当該年度の前年度の特別調整率を乗じて得た率を乗じて得た率を基準とするとされている。\n\n₃ 平成₂ 年₁ 月生まれの甲は、平成₂₃ 年₁ 月に同い年の乙と結婚し、令和₇ 年₁ 月に離婚した。婚姻期間中、乙は厚生年金保険の被保険者であり、甲は国民年金の第₃ 号被保険者であった。また、乙は、令和₂ 年₈ 月に初診日のある傷病により、令和₄ 年₂ 月の障害認定日に障害等級₃ 級に該当しており、離婚時には、当該障害による障害厚生年金を受給していた。この事例において、₃ 号分割標準報酬改定請求の対象とならない期間は、平成₂₃ 年₁ 月から 【D】 までである。\n\n₄ 厚生年金保険の被保険者丙は、令和₇ 年₈ 月₁ 日に自宅内で倒れて、病院に緊急搬送された。丙は、同日において、₆₇ 歳の男性であり、老齢基礎年金、老齢厚生年金ともに繰下げ待機中である。この傷病によって、丙が障害認定日に、障害等級₂ 級と認定された場合、受給権が発生する障害年金は、 【E】 。なお、丙に保険料滞納期間はないものとする。",
+    choices: [
+      "① ₁₁ 日",
+      "② ₁₂ 日",
+      "③ ₁₃ 日",
+      "④ ₁₄ 日",
+      "⑤ ₁₅ 日",
+      "⑥ ₁₆ 日",
+      "⑦ ₁₇ 日",
+      "⑧ ₁₈ 日",
+      "⑨ 障害基礎年金と障害厚生年金である",
+      "⑩ 障害基礎年金のみである",
+      "⑪ 障害厚生年金のみである",
+      "⑫ 実質賃金変動率",
+      "⑬ 実質手取り賃金変動率",
+      "⑭ 存在しない",
+      "⑮ 名目賃金変動率",
+      "⑯ 名目手取り賃金変動率",
+      "⑰ 令和₂ 年₈ 月",
+      "⑱ 令和₄ 年₁ 月",
+      "⑲ 令和₄ 年₂ 月",
+      "⑳ 令和₆ 年₁₂ 月"
+    ],
+    answer: [6, 0, 15, 18, 10], // A:⑦, B:①, C:⑯, D:⑲, E:⑪
+    exp: [
+      "【A】= ⑦ ₁₇ 日。定時決定（算定基礎）における原則の支払基礎日数は「17日」以上です。",
+      "【B】= ① ₁₁ 日。短時間労働者（特定適用事業所の4分の3未満の者等）における定時決定の支払基礎日数の下限要件は「11日」以上です。",
+      "【C】= ⑯ 名目手取り賃金変動率。再評価率の改定基準となるのは「名目手取り賃金変動率」です。",
+      "【D】= ⑲ 令和₄ 年₂ 月。3号分割において、障害厚生年金の受給権者である期間（その障害の初診日がある月から障害認定日等がある月まで）は、3号分割請求の対象期間から除外されます。初診日（R2年8月）から障害認定日（R4年2月）までの期間が除外されるため、除外期間の末日は「令和4年2月」となります。",
+      "【E】= ⑪ 障害厚生年金のみである。被保険者丙は67歳（65歳以降）であり、老齢基礎年金等の繰下げ待機中（受給権を有した状態）です。65歳以後に発生した障害について、障害基礎年金は受給資格要件（65歳未満、または65歳前までに障害状態になった等）を欠くため発生しません。したがって、厚生年金保険法上の「障害厚生年金のみ」が支給されます。"
+    ]
+  },
+  {
+    cat: "国民年金法 〔問 8〕",
+    text: "₁ 国民年金の保険料は、 【A】 の年金制度改正により、 【A】 度水準で、毎年度₂₈₀ 円ずつ段階的に引き上げてきたが、平成₂₉ 年度に上限の 【B】 に達したため、引き上げを完了した。その上で、令和元年度から、 【C】 の財源とする目的で、保険料を₁₀₀ 円引き上げている。ただし、毎年度の実際の保険料額は、国民年金法第₈₇ 条第₃ 項の規定により、この額に保険料改定率を乗じて算出するため、変動する。\n\n₂ 学生納付特例に係る所得要件について、扶養親族等があるときは 【D】 万円に当該扶養親族等（特定年齢扶養親族にあっては、控除対象扶養親族に限る。）₁ 人につき 【E】 万円（当該扶養親族等が所得税法に規定する同一生計配偶者又は老人扶養親族であるときは当該同一生計配偶者又は老人扶養親族₁ 人につき₄₈ 万円とし、当該扶養親族等が特定扶養親族等であるときは当該特定扶養親族等₁ 人につき₆₃ 万円とする。）を加算した額以下とする。",
+    choices: [
+      "① ₃₂",
+      "② ₃₅",
+      "③ ₃₆",
+      "④ ₃₈",
+      "⑤ ₁₀₃",
+      "⑥ ₁₀₆",
+      "⑦ ₁₂₈",
+      "⑧ ₁₆₈",
+      "⑨ ₁₃，₃₀₀ 円",
+      "⑩ ₁₆，₈₀₀ 円",
+      "⑪ ₁₆，₉₀₀ 円",
+      "⑫ ₁₇，₀₀₀ 円",
+      "⑬ 遺族基礎年金の父子家庭への支給",
+      "⑭ 産前産後期間の保険料免除制度",
+      "⑮ 年金額の特例水準の解消",
+      "⑯ 年金生活者支援給付金",
+      "⑰ 平成₆ 年",
+      "⑱ 平成₁₂ 年",
+      "⑲ 平成₁₆ 年",
+      "⑳ 平成₂₄ 年"
+    ],
+    answer: [18, 10, 13, 6, 3], // A:⑲, B:⑪, C:⑭, D:⑦, E:④
+    exp: [
+      "【A】= ⑲ 平成₁₆ 年。マクロ経済スライドや保険料の段階的上限設定を導入したのは「平成16年」の年金大改正です。",
+      "【B】= ⑪ ₁₆，₉₀₀ 円。平成16年改正による引き上げ上限の基本法定額は、月額「16,900円」です。",
+      "【C】= ⑭ 産前産後期間の保険料免除制度。平成31年（令和元年）4月より施行された第1号被保険者の産前産後免除期間中の年金財源（国庫負担含む）を確保するため、保険料が一律100円増額されました。",
+      "【D】= ⑦ ₁₂₈。学生納付特例の所得要件基準額は、「128万円」+（扶養親族等の数×38万円）です。",
+      "【E】= ④ ₃₈。所得要件計算における一般の扶養親族等の加算額は、1人につき「38万円」です。学生本人のみの場合の所得制限限度額は「128万円」です。"
+    ]
+  }
+];
+
+/* ===== 起動時データ整合チェック ===== */
+function blankCountOf(t){return (t.match(/【[A-E]】/g)||[]).length;}
+function blankLabelsOf(t){var m=t.match(/【([A-E])】/g)||[];return m.map(function(x){return x.charAt(1);});}
+
+/* ===== 保存データの管理 ===== */
+function load(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function save(k,v){localStorage.setItem(k,JSON.stringify(v));}
+
+var QS = load('s57_qs_v3', null);
+if (!QS || QS.length === 0) {
+  QS = JSON.parse(JSON.stringify(SEED));
+  save('s57_qs_v3', QS);
+}
+var ST = load('s57_st_v3', {idx:0, okBlanks:0, wrong:[]});
+
+var cur = ST.idx || 0;
+if (cur >= QS.length) { cur = 0; ST.idx = 0; }
+
+var picks = {};             // 現在選択中の値 {0: selectedIdx, 1: selectedIdx...}
+var checked = false;        // すでに採点ボタンを押したか
+var activeBlank = 0;        // 現在フォーカスされている空欄の順番 (0 = 最初の空欄)
+
+/* ===== 画面更新ロジック ===== */
+function renderHead() {
+  document.getElementById('prog').textContent = cur + 1;
+  document.getElementById('totalQ').textContent = QS.length;
+  document.getElementById('cnt').textContent = QS.length;
+  document.getElementById('okBlanks').textContent = ST.okBlanks;
+  document.getElementById('ngCount').textContent = ST.wrong.length;
+}
+
+// 本文中の【A】～【E】を動的にspan要素（タップ可能な空欄）へ置換する
+function buildText(text) {
+  var labels = blankLabelsOf(text);
+  var i = -1;
+  return text.replace(/【([A-E])】/g, function(match, labelChar) {
+    i++;
+    var bi = i; // 登場順インデックス
+    var content = "";
+    if (picks[bi] != null) {
+      content = "[" + labelChar + "] " + QS[cur].choices[picks[bi]];
+    } else {
+      content = "【" + labelChar + "】";
+    }
+    
+    var cls = "blank";
+    if (picks[bi] != null) cls += " filled";
+    if (bi === activeBlank) cls += " cur";
+    
+    return '<span class="' + cls + '" id="bk' + bi + '" onclick="selBlank(' + bi + ')">' + content + '</span>';
+  });
+}
+
+// ユーザーが本文のいずれかの空欄をタップした際のイベント
+function selBlank(bi) {
+  if (checked) return; // 採点後は選択不可
+  activeBlank = bi;
+  drawQ();
+}
+
+// 選択肢エリア(20択のボタン一覧)を描画する
+function drawChoices() {
+  var q = QS[cur];
+  var labels = blankLabelsOf(q.text);
+  var curLabel = labels[activeBlank] || "?";
+  
+  var html = '<div class="label">空欄【' + curLabel + '】に入る語句を、以下の20択から選択してください：</div>';
+  html += '<div class="choices">';
+  
+  q.choices.forEach(function(choiceText, i) {
+    var isSelected = (picks[activeBlank] === i) ? ' sel' : '';
+    html += '<button class="choice' + isSelected + '" onclick="pick(' + i + ')">' + choiceText + '</button>';
+  });
+  html += '</div>';
+  
+  document.getElementById('choiceArea').innerHTML = html;
+}
+
+// 選択肢を1つ選んだ時
+function pick(i) {
+  if (checked) return;
+  picks[activeBlank] = i;
+  
+  // 自動的に次の空欄へフォーカスを移動する
+  var totalBlanks = blankCountOf(QS[cur].text);
+  drawQ();
+  
+  // まだ埋まっていない空欄があればそこへ、なければ次の番号へ進める
+  for (var b = 0; b < totalBlanks; b++) {
+    if (picks[b] == null) {
+      activeBlank = b;
+      drawQ();
+      return;
+    }
+  }
+}
+
+// 問題の再描画メイン処理
+function drawQ() {
+  var q = QS[cur];
+  var totalBlanks = blankCountOf(q.text);
+  
+  var html = '<div class="q-cat">' + q.cat + '</div>';
+  html += '<div class="q-text">' + buildText(q.text) + '</div>';
+  html += '<div class="hint">☝️ 上の空欄【A】〜【E】をタップすると、その空欄に対応する20個の選択肢に切り替わります。</div>';
+  html += '<div id="choiceArea"></div>';
+  
+  if (!checked) {
+    html += '<button class="btn" onclick="checkAns()">すべての空欄を採点する</button>';
+  }
+  
+  html += '<div class="exp" id="exp"></div>';
+  
+  html += '<div class="row2" style="margin-top:16px">' +
+          '<button class="btn sub half" onclick="goQ(-1)">◀ 前の問題</button>' +
+          '<button class="btn sub half" onclick="goQ(1)">次の問題 ▶</button>' +
+          '</div>';
+          
+  document.getElementById('quizCard').innerHTML = html;
+  drawChoices();
+  
+  if (checked) {
+    showResult();
+  }
+  renderHead();
+}
+
+// 採点処理
+function checkAns() {
+  var q = QS[cur];
+  var n = blankCountOf(q.text);
+  var labels = blankLabelsOf(q.text);
+  
+  // 未回答チェック
+  for (var b = 0; b < n; b++) {
+    if (picks[b] == null) {
+      alert('未入力の空欄があります。空欄【' + labels[b] + '】を選択してください。');
+      activeBlank = b;
+      drawQ();
+      return;
+    }
+  }
+  
+  checked = true;
+  var today = new Date().toLocaleDateString('ja-JP');
+  
+  for (var b = 0; b < n; b++) {
+    var isCorrect = (picks[b] === q.answer[b]);
+    if (isCorrect) {
+      ST.okBlanks++;
+    } else {
+      // 誤答ログを保存
+      ST.wrong.push({
+        date: today,
+        cat: q.cat,
+        blank: labels[b],
+        your: q.choices[picks[b]],
+        correct: q.choices[q.answer[b]],
+        exp: q.exp[b] || "解説はありません。"
+      });
+    }
+  }
+  save('s57_st_v3', ST);
+  drawQ();
+}
+
+// 採点結果・解説の表示
+function showResult() {
+  var q = QS[cur];
+  var n = blankCountOf(q.text);
+  var labels = blankLabelsOf(q.text);
+  
+  for (var b = 0; b < n; b++) {
+    var el = document.getElementById('bk' + b);
+    if (el) {
+      el.classList.remove('cur', 'filled');
+      var isCorrect = (picks[b] === q.answer[b]);
+      el.classList.add(isCorrect ? 'ok' : 'ng');
+    }
+  }
+  
+  var h = '<h3 style="margin-top:0; color:#fff; border-bottom:1px solid var(--border); padding-bottom:8px;">💡 採点結果と詳細解説</h3>';
+  for (var b = 0; b < n; b++) {
+    var isCorrect = (picks[b] === q.answer[b]);
+    h += '<div class="item">';
+    h += '<b>【' + labels[b] + '】</b> ';
+    if (isCorrect) {
+      h += '<span class="o">◯ 正解</span><br>';
+    } else {
+      h += '<span class="x">× 不正解</span><br>';
+    }
+    h += 'あなたの回答: <span style="color:#fca5a5">' + q.choices[picks[b]] + '</span><br>';
+    if (!isCorrect) {
+      h += '正しい解答: <span class="o" style="font-weight:bold">' + q.choices[q.answer[b]] + '</span><br>';
+    }
+    h += '<span style="color:#d1d5db; font-size:12.5px;">解説: ' + q.exp[b] + '</span>';
+    h += '</div>';
+  }
+  
+  var expDiv = document.getElementById('exp');
+  expDiv.innerHTML = h;
+  expDiv.classList.add('show');
+}
+
+// 問題の前後移動
+function goQ(d) {
+  cur += d;
+  if (cur < 0) {
+    alert("これが最初の問題です。");
+    cur = 0;
+    return;
+  }
+  if (cur >= QS.length) {
+    alert("すべての問題を終了しました！最初に戻ります。");
+    cur = 0;
+  }
+  
+  ST.idx = cur;
+  save('s57_st_v3', ST);
+  
+  // 各フラグ初期化
+  picks = {};
+  checked = false;
+  activeBlank = 0;
+  
+  drawQ();
+}
+
+/* ===== 誤答履歴ページの描画 ===== */
+function renderWrong() {
+  var box = document.getElementById('wrongList');
+  if (ST.wrong.length === 0) {
+    box.innerHTML = '<p style="text-align:center; color:var(--sub);"><small>現在、間違えた問題はありません。素晴らしい！</small></p>';
+    return;
+  }
+  
+  box.innerHTML = ST.wrong.slice().reverse().map(function(w) {
+    return '<div class="wrongItem">' +
+           '<div class="h">' + w.cat + ' 空欄【' + w.blank + '】 <span style="font-size:10px; font-weight:normal; color:var(--sub); float:right;">' + w.date + '</span></div>' +
+           '<div>あなたの誤答: <span style="color:var(--ng); text-decoration:line-through;">' + w.your + '</span></div>' +
+           '<div>正しい解答: <span style="color:var(--ok); font-weight:bold;">' + w.correct + '</span></div>' +
+           '<div style="margin-top:6px; font-size:12px; color:var(--sub); border-top:1px solid #2d3748; padding-top:4px;">' + w.exp + '</div>' +
+           '</div>';
+  }).join('');
+}
+
+function clearWrong() {
+  if (confirm('蓄積されたすべての誤答記録をクリアしますか？')) {
+    ST.wrong = [];
+    save('s57_st_v3', ST);
+    renderWrong();
+    renderHead();
+  }
+}
+
+/* ===== タブ切り替え制御 ===== */
+function tab(name, btn) {
+  var ps = document.querySelectorAll('.page');
+  for (var i = 0; i < ps.length; i++) {
+    ps[i].classList.remove('active');
+  }
+  document.getElementById('p-' + name).classList.add('active');
+  
+  var bs = document.querySelectorAll('.nav button');
+  for (var j = 0; j < bs.length; j++) {
+    bs[j].classList.remove('active');
+  }
+  if (btn) btn.classList.add('active');
+  
+  if (name === 'review') renderWrong();
+  if (name === 'study') drawQ();
+  if (name === 'add') {
+    document.getElementById('cnt').textContent = QS.length;
+  }
+}
+
+/* ===== 外部JSON追加・初期化制御 ===== */
+function importJSON() {
+  var t = document.getElementById('box').value.trim();
+  if (!t) {
+    alert('JSONデータをテキストエリアに貼り付けてください。');
+    return;
+  }
+  try {
+    var arr = JSON.parse(t);
+    if (!Array.isArray(arr)) {
+      arr = [arr];
+    }
+    
+    var errorMsgs = [];
+    arr.forEach(function(q, i) {
+      if (!q.cat || !q.text || !q.choices || !q.answer || !q.exp) {
+        errorMsgs.push("データ項目(cat, text, choices, answer, exp)が欠落しています。");
+        return;
+      }
+      var blankNum = blankCountOf(q.text);
+      if (q.answer.length !== blankNum || q.exp.length !== blankNum) {
+        errorMsgs.push(q.cat + " の「空欄数(" + blankNum + ")」「正答値(answer)の要素数(" + q.answer.length + ")」「解説(exp)の要素数(" + q.exp.length + ")」が不一致です。");
+      }
+    });
+    
+    if (errorMsgs.length > 0) {
+      alert("整合性エラーが発生したため、取り込みを中止しました：\n" + errorMsgs.join("\n"));
+      return;
+    }
+    
+    arr.forEach(function(q) {
+      QS.push(q);
+    });
+    
+    save('s57_qs_v3', QS);
+    document.getElementById('box').value = "";
+    alert(arr.length + "問を追加しました！（合計 " + QS.length + " 問になりました）");
+    renderHead();
+  } catch (e) {
+    alert("JSONデータのパースに失敗しました。正しいJSON構文（括弧の閉じ等）かご確認ください：\n" + e.message);
+  }
+}
+
+function exportJSON() {
+  var dataStr = JSON.stringify(QS, null, 2);
+  var blob = new Blob([dataStr], {type: 'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'sharoshi_selected_questions_backup.json';
+  a.click();
+}
+
+function resetSeed() {
+  if (confirm('初期問題以外の追加データを削除し、第57回選択式試験（全8問）の初期状態に戻しますか？')) {
+    QS = JSON.parse(JSON.stringify(SEED));
+    save('s57_qs_v3', QS);
+    cur = 0;
+    ST.idx = 0;
+    ST.okBlanks = 0;
+    save('s57_st_v3', ST);
+    picks = {};
+    checked = false;
+    activeBlank = 0;
+    drawQ();
+    alert('初期状態にリセットしました。');
+  }
+}
+
+/* ===== アプリ起動処理 ===== */
+(function() {
+  drawQ();
+  renderHead();
+})();
+</script>
+</body>
+</html>
